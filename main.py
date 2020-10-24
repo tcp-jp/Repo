@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/bin/python3.8
 # Import Libraries
 import getopt
 import sys
@@ -10,7 +10,25 @@ from selenium.webdriver.common.action_chains import ActionChains as AC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-BROWSER=webdriver.Chrome('chromedriver_win32/chromedriver.exe');
+def get_platform(current):
+    platforms = {
+        'linux' : 'Linux',
+        'linux1' : 'Linux',
+        'linux2' : 'Linux',
+        'darwin' : 'OS X',
+        'win32' : 'Windows',
+        'win64' : 'Windows'
+    }
+    if sys.platform not in platforms:
+	    return sys.platform
+    return platforms[current]
+platform = get_platform(sys.platform)
+if platform == "Linux":
+    BROWSER=webdriver.Chrome('chromedriver_linux64/chromedriver.exe');
+if platform == "Windows":
+    BROWSER=webdriver.Chrome('chromedriver_win32/chromedriver.exe');
+else:
+    BROWSER=webdriver.Chrome('chromedriver_win32/chromedriver.exe');
 BROWSER.maximize_window()
 USERNAME="username"
 PASSWORD="password"
